@@ -5,7 +5,8 @@
 FROM ubuntu:12.04
 MAINTAINER srid
 
-ENV DISCOURSE_VERSION 0.9.7.6
+ENV DISCOURSE_VERSION master
+ENV DISCOURSE_REPO https://github.com/binaryage/discourse.git
 ENV RAILS_ENV production
 
 ENV LANGUAGE en_US.UTF-8

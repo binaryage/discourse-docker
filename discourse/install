@@ -7,10 +7,10 @@ apt-get -qy update
 apt-get -qy install git 
 
 # Get discourse stable tag
-git clone --depth 1 https://github.com/discourse/discourse.git
+git clone --depth 1 $DISCOURSE_REPO
 cd discourse
 
-git checkout v$DISCOURSE_VERSION
+git checkout $DISCOURSE_VERSION
 
 # We don't care about having .git on an ephemeral filesystem.
 rm -rf .git
