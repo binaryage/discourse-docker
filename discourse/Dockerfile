@@ -11,7 +11,9 @@ ENV RAILS_ENV production
 
 ENV LANGUAGE en_US.UTF-8
 ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
+RUN locale-gen en_US en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8
+RUN dpkg-reconfigure locales
 
 ADD install /
 
