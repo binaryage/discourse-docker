@@ -48,11 +48,11 @@ bundle install
 
 bundle install --deployment --without test
 
-pushd config
-cp database.yml.production-sample database.yml
-cp redis.yml.sample redis.yml
-cp environments/production.rb.sample environments/production.rb
-popd
+# pushd config
+# cp database.yml.production-sample database.yml
+# cp redis.yml.sample redis.yml
+# cp environments/production.rb.sample environments/production.rb
+# popd
 
 # ./public will be a docker data-volume to be shared with nginx. Move
 # the original public folder out of the way, for now.
