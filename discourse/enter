@@ -32,19 +32,26 @@ function run_cmd {
 }
 
 function configure_from_env {
-# production database
-    sed -i "s/database: discourse_prod/database: postgres/" config/database.yml
-    sed -i "s/# username: discourse_prod/username: root/" config/database.yml
-    sed -i "s/# password: itisagooddaytovi/password: postgres/" config/database.yml
-    sed -i "s/# host: dbhost/host: $POSTGRES_HOST\n  port: $POSTGRES_PORT/" config/database.yml
-
+	export DISCOURSE_DB_NAME=postgres
+	export DISCOURSE_DB_USERNAME=root
+	export DISCOURSE_DB_PASSWORD=postgres
+	export DISCOURSE_DB_HOST=$POSTGRES_HOST
+	export DISCOURSE_DB_PORT=$POSTGRES_PORT
+	export DISCOURSE_HOSTNAME=$DISCOURSE_HOST
+	
+# # production database
+#     sed -i "s/database: discourse_prod/database: postgres/" config/database.yml
+#     sed -i "s/# username: discourse_prod/username: root/" config/database.yml
+#     sed -i "s/# password: itisagooddaytovi/password: postgres/" config/database.yml
+#     sed -i "s/# host: dbhost/host: $POSTGRES_HOST\n  port: $POSTGRES_PORT/" config/database.yml
+ 
 # test db
     sed -i "s/# username: discourse_test/username: root/" config/database.yml
     sed -i "s/# password: 123123123123/password: postgres/" config/database.yml
     sed -i "s/host: localhost/host: $POSTGRES_HOST\n  port: $POSTGRES_PORT/" config/database.yml
 
-# set site domain
-    sed -i "s/production.localhost/$DISCOURSE_HOST/" config/database.yml
+# # set site domain
+#     sed -i "s/production.localhost/$DISCOURSE_HOST/" config/database.yml
 
 # http://stackoverflow.com/a/7529711
     sed -i "s/timeout: 5000/timeout: 5000\n  template: template0/" config/database.yml
