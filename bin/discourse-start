@@ -11,6 +11,9 @@ START_DISCOURSE="sudo docker run \
      -e POSTGRES_HOST=$HOSTIP -e POSTGRES_PORT=$POSTGRES_PORT \
      -e POSTMARK_API_KEY=$POSTMARK_API_KEY \
      -e DISCOURSE_HOST=$DISCOURSE_HOST \
+     -e REDIS_HOST=$REDIS_HOST \
+     -e REDIS_PORT=$REDIS_PORT \
+     -e REDIS_PASSWORD=$REDIS_PASSWORD \
      -v $(pwd)/data/discourse-public:/discourse/public"
 
 if [ "$1" = "web" ]; then

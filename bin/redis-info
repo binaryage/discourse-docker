@@ -6,6 +6,9 @@ set -o pipefail
 . etc/env
 
 ID=$(sudo docker ps | grep srid/redis:2.6 | awk '{print $1}')
-REDIS_PORT=$(sudo docker port $ID 6379 | awk -F: '{print $2}')
+export REDIS_PORT=$(sudo docker port $ID 6379 | awk -F: '{print $2}')
+export REDIS_HOST=$HOSTIP
+export REDIS_PASSWORD=
 
 export REDIS_PROVIDER_URL="redis://user@$HOSTIP:$REDIS_PORT"
+

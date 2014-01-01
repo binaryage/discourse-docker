@@ -38,6 +38,9 @@ function configure_from_env {
 	export DISCOURSE_DB_HOST=$POSTGRES_HOST
 	export DISCOURSE_DB_PORT=$POSTGRES_PORT
 	export DISCOURSE_HOSTNAME=$DISCOURSE_HOST
+	export DISCOURSE_REDIS_HOST=$REDIS_HOST
+	export DISCOURSE_REDIS_PORT=$REDIS_PORT
+	export DISCOURSE_REDIS_PASSWORD=$REDIS_PASSWORD
 	
 # # production database
 #     sed -i "s/database: discourse_prod/database: postgres/" config/database.yml
