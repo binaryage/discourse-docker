@@ -23,6 +23,15 @@ RUN dpkg-reconfigure locales
 
 RUN	DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.1 postgresql-contrib-9.1
 
+# install WAL-E
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
+RUN echo "deb-src http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install -y lzop pv build-essential python-dev wget
+RUN wget --no-check-certificate https://bitbucket.org/pypa/setuptools/raw/0.8/ez_setup.py -O - | python
+RUN easy_install pip
+RUN pip install wal-e
+
 # allow autostart again
 RUN	rm /usr/sbin/policy-rc.d
 

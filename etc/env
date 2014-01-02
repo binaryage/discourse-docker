@@ -25,6 +25,15 @@ export SMTP_PASSWORD=
 # IP address of current host.
 export HOSTIP=$(/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
 
+# WAL-E support for postgres backups (see https://github.com/wal-e/wal-e)
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export WALE_S3_PREFIX=
+
+export WABS_ACCOUNT_NAME=
+export WABS_ACCESS_KEY=
+export WALE_WABS_PREFIX=
+
 # Overrides.
 if [ -e .env ]; then
     source .env

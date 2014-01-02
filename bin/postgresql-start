@@ -5,6 +5,12 @@ set -e
 
 set -x
 exec sudo docker run -name=discourse-docker-postgresql \
+    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+    -e WALE_S3_PREFIX=$WALE_S3_PREFIX \
+    -e WABS_ACCOUNT_NAME=$WABS_ACCOUNT_NAME \
+    -e WABS_ACCESS_KEY=$WABS_ACCESS_KEY \
+    -e WALE_WABS_PREFIX=$WALE_WABS_PREFIX \
     -p 5432 \
     -v $(pwd)/data/postgres:/var/lib/postgresql \
     srid/postgresql:9.1

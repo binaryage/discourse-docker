@@ -5,6 +5,10 @@
 DATADIR=/var/lib/postgresql/9.1/main
 BINDIR=/usr/lib/postgresql/9.1/bin
 
+if [ ! -z "$AWS_ACCESS_KEY_ID" ] || [ ! -z "$WABS_ACCOUNT_NAME" ]; then
+    sed -i "s/#wal_level = minimal/wal_level = archive\narchive_mode = on\narchive_command = 'wal-e wal-push %p'\narchive_timeout = 60\n/" /etc/postgresql/9.1/main/postgresql.conf
+fi
+
 # test if DATADIR is existent
 if [ ! -d $DATADIR ]; then
   echo "Creating Postgres data at $DATADIR"
