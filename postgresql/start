@@ -25,6 +25,6 @@ if [ ! "$(ls -A $DATADIR)" ]; then
   su postgres sh -c "$BINDIR/postgres --single  -D $DATADIR  -c config_file=/etc/postgresql/9.1/main/postgresql.conf" <<< "CREATE USER root WITH SUPERUSER PASSWORD 'postgres';"
 fi
 
-cat /etc/postgresql/9.1/main/postgresql.conf
+#cat /etc/postgresql/9.1/main/postgresql.conf
 
 su postgres sh -c "$BINDIR/postgres           -D $DATADIR  -c config_file=/etc/postgresql/9.1/main/postgresql.conf  -c listen_addresses=*" 
