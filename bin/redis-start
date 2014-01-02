@@ -4,4 +4,4 @@ set -e
 . etc/env
 
 set -x
-exec sudo docker run -rm -name=discourse-docker-redis -p 6379 srid/redis:2.6
+exec sudo docker run $DOCKER_RUN_OPTS -name=discourse-docker-redis -p 6379 srid/redis:2.6

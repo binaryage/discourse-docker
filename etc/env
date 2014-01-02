@@ -1,6 +1,11 @@
 # -*- sh -*-
 # To override the environment variables here, add them to .env.
 
+# you may want to add 
+#  "-d" to start docker containers in detached mode (when not using supervisor)
+#  "-rm" to remove existing docker containers with the same name
+export DOCKER_RUN_OPTS=
+
 # Top-level domain of your Discourse site. This will be added to rails
 # database.yml
 export DISCOURSE_HOST="unconfigured.example.com"
