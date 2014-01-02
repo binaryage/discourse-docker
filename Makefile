@@ -29,13 +29,16 @@ ps:
 
 supervisor:
 	sudo `which supervisord` -n -c etc/supervisord.conf
-	
-run:
+
+rm:
 	sudo docker rm discourse-docker-nginx
 	sudo docker rm discourse-docker-redis
 	sudo docker rm discourse-docker-postgresql
 	sudo docker rm discourse-docker-sidekiq
 	sudo docker rm discourse-docker-web
+	
+run:
+	make rm
 	bin/nginx-start
 	bin/redis-start
 	bin/postgresql-start
