@@ -32,16 +32,19 @@ function run_cmd {
 }
 
 function configure_from_env {
-	export DISCOURSE_DB_NAME=postgres
-	export DISCOURSE_DB_USERNAME=root
-	export DISCOURSE_DB_PASSWORD=postgres
-	export DISCOURSE_DB_HOST=$POSTGRES_HOST
-	export DISCOURSE_DB_PORT=$POSTGRES_PORT
-	export DISCOURSE_HOSTNAME=$DISCOURSE_HOST
-	export DISCOURSE_REDIS_HOST=$REDIS_HOST
-	export DISCOURSE_REDIS_PORT=$REDIS_PORT
-	export DISCOURSE_REDIS_PASSWORD=$REDIS_PASSWORD
-	
+    # http://meta.discourse.org/t/tuning-ruby-and-rails-for-discourse/4126/12
+    export RUBY_GC_MALLOC_LIMIT=90000000
+    
+    export DISCOURSE_DB_NAME=postgres
+    export DISCOURSE_DB_USERNAME=root
+    export DISCOURSE_DB_PASSWORD=postgres
+    export DISCOURSE_DB_HOST=$POSTGRES_HOST
+    export DISCOURSE_DB_PORT=$POSTGRES_PORT
+    export DISCOURSE_HOSTNAME=$DISCOURSE_HOST
+    export DISCOURSE_REDIS_HOST=$REDIS_HOST
+    export DISCOURSE_REDIS_PORT=$REDIS_PORT
+    export DISCOURSE_REDIS_PASSWORD=$REDIS_PASSWORD
+    
 # # production database
 #     sed -i "s/database: discourse_prod/database: postgres/" config/database.yml
 #     sed -i "s/# username: discourse_prod/username: root/" config/database.yml
