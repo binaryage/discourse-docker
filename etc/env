@@ -15,6 +15,13 @@ export NGINX_PORT=5000
 # Postmark API key for email service.
 export POSTMARK_API_KEY=""
 
+# SMTP settings (optional)
+export SMTP_ADDRESS=
+export SMTP_PORT=
+export SMTP_DOMAIN=
+export SMTP_USER_NAME=
+export SMTP_PASSWORD=
+
 # IP address of current host.
 export HOSTIP=$(/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
 
