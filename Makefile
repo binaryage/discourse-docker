@@ -29,6 +29,32 @@ ps:
 
 supervisor:
 	sudo `which supervisord` -n -c etc/supervisord.conf
+	
+run:
+	sudo docker rm discourse-docker-nginx
+	sudo docker rm discourse-docker-redis
+	sudo docker rm discourse-docker-postgresql
+	sudo docker rm discourse-docker-sidekiq
+	sudo docker rm discourse-docker-web
+	bin/nginx-start
+	bin/redis-start
+	bin/postgresql-start
+	bin/discourse-start sidekiq
+	bin/discourse-start web
+
+start:
+	sudo docker start discourse-docker-postgresql
+	sudo docker start discourse-docker-redis
+	sudo docker start discourse-docker-sidekiq
+	sudo docker start discourse-docker-web
+	sudo docker start discourse-docker-nginx
+
+stop:
+	sudo docker stop discourse-docker-nginx
+	sudo docker stop discourse-docker-sidekiq
+	sudo docker stop discourse-docker-web
+	sudo docker stop discourse-docker-redis
+	sudo docker stop discourse-docker-postgresql
 
 info:
 	bin/nginx-info
