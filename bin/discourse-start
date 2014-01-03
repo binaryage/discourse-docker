@@ -18,7 +18,7 @@ START_DISCOURSE="sudo docker run $DOCKER_RUN_OPTS \
      -e SMTP_PORT=$SMTP_PORT \
      -e SMTP_DOMAIN=$SMTP_DOMAIN \
      -e SMTP_USER_NAME=$SMTP_USER_NAME \
-     -e SMTP_PASSWOPD=$SMTP_PASSWORD \
+     -e SMTP_PASSWORD=$SMTP_PASSWORD \
      -v $(pwd)/data/discourse-public:/discourse/public"
 
 if [ "$1" = "web" ]; then
