@@ -32,5 +32,9 @@ if [ "$1" = "sidekiq" ]; then
     START_DISCOURSE="$START_DISCOURSE -name discourse-docker-sidekiq"
 fi
 
+if [ "$1" = "migrate" ]; then
+    START_DISCOURSE="$START_DISCOURSE -d=false"
+fi
+
 set -x
 exec $START_DISCOURSE srid/discourse $@
