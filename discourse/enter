@@ -27,6 +27,13 @@ function setup {
     set +x
 }
 
+function migrate {
+    set -x
+    bundle exec rake db:migrate
+    time bundle exec rake assets:precompile
+    set +x
+}
+
 function run_cmd {
     echo $@ | exec bash
 }
@@ -34,6 +41,7 @@ function run_cmd {
 function configure_from_env {
     # http://meta.discourse.org/t/tuning-ruby-and-rails-for-discourse/4126/12
     export RUBY_GC_MALLOC_LIMIT=90000000
+    export RAILS_ENV=production
     
     export DISCOURSE_HOSTNAME=$DISCOURSE_HOST
 
@@ -80,6 +88,8 @@ configure_from_env
 
 if [ "$1" = "setup" ]; then
     setup
+elif [ "$1" == "migrate" ]; then
+    migrate
 elif [ "$1" == "web" ]; then
     echo "+ bundle exec rails server"
     run_cmd "bundle exec rails server"
@@ -93,6 +103,7 @@ No command specified. Valid commands include:
   * web: Run the rails web server
   * sidekiq: Run the sidekiq worker
   * setup: Run the one-time Discourse setup
+  * migrate: Run Discourse migration
 
 See https://github.com/srid/discourse-docker for details.
 EOF
