@@ -19,6 +19,7 @@ START_DISCOURSE="sudo docker run $DOCKER_RUN_OPTS \
      -e SMTP_DOMAIN=$SMTP_DOMAIN \
      -e SMTP_USER_NAME=$SMTP_USER_NAME \
      -e SMTP_PASSWORD=$SMTP_PASSWORD \
+     -e HIPCHAT_AUTH_TOKEN=$HIPCHAT_AUTH_TOKEN \
      -v $(pwd)/data/discourse-public:/discourse/public"
 
 if [ "$1" = "web" ]; then
