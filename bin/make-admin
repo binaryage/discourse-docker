@@ -6,8 +6,8 @@ set -e
 USERNAME=$1
 
 if [ -z "$USERNAME" ]; then
-    echo "No username specified."
-    exit 1
+  echo "No username specified."
+  exit 1
 fi
 
 . bin/postgresql-info

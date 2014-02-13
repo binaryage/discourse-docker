@@ -6,34 +6,35 @@ set -e
 source bin/postgresql-info
 source bin/redis-info
 
-START_DISCOURSE="sudo docker run $DOCKER_RUN_OPTS \
-     -e REDIS_PROVIDER_URL=$REDIS_PROVIDER_URL \
-     -e POSTGRES_HOST=$HOSTIP -e POSTGRES_PORT=$POSTGRES_PORT \
-     -e POSTMARK_API_KEY=$POSTMARK_API_KEY \
-     -e DISCOURSE_HOST=$DISCOURSE_HOST \
-     -e REDIS_HOST=$REDIS_HOST \
-     -e REDIS_PORT=$REDIS_PORT \
-     -e REDIS_PASSWORD=$REDIS_PASSWORD \
-     -e SMTP_ADDRESS=$SMTP_ADDRESS \
-     -e SMTP_PORT=$SMTP_PORT \
-     -e SMTP_DOMAIN=$SMTP_DOMAIN \
-     -e SMTP_USER_NAME=$SMTP_USER_NAME \
-     -e SMTP_PASSWORD=$SMTP_PASSWORD \
-     -e HIPCHAT_AUTH_TOKEN=$HIPCHAT_AUTH_TOKEN \
-     -v $(pwd)/data/discourse-public:/discourse/public"
+START_DISCOURSE="\
+  sudo docker run $DOCKER_RUN_OPTS \
+   -e REDIS_PROVIDER_URL=$REDIS_PROVIDER_URL \
+   -e POSTGRES_HOST=$HOSTIP -e POSTGRES_PORT=$POSTGRES_PORT \
+   -e POSTMARK_API_KEY=$POSTMARK_API_KEY \
+   -e DISCOURSE_HOST=$DISCOURSE_HOST \
+   -e REDIS_HOST=$REDIS_HOST \
+   -e REDIS_PORT=$REDIS_PORT \
+   -e REDIS_PASSWORD=$REDIS_PASSWORD \
+   -e SMTP_ADDRESS=$SMTP_ADDRESS \
+   -e SMTP_PORT=$SMTP_PORT \
+   -e SMTP_DOMAIN=$SMTP_DOMAIN \
+   -e SMTP_USER_NAME=$SMTP_USER_NAME \
+   -e SMTP_PASSWORD=$SMTP_PASSWORD \
+   -e HIPCHAT_AUTH_TOKEN=$HIPCHAT_AUTH_TOKEN \
+   -v $(pwd)/data/discourse-public:/discourse/public"
 
 if [ "$1" = "web" ]; then
-    # TODO: use random port on host, and change nginx-start
-    # accordingly.
-    START_DISCOURSE="$START_DISCOURSE -p 3000:3000 -name discourse-docker-web"
+  # TODO: use random port on host, and change nginx-start
+  # accordingly.
+  START_DISCOURSE="$START_DISCOURSE -p 3000:3000 -name discourse-docker-web"
 fi
 
 if [ "$1" = "sidekiq" ]; then
-    START_DISCOURSE="$START_DISCOURSE -name discourse-docker-sidekiq"
+  START_DISCOURSE="$START_DISCOURSE -name discourse-docker-sidekiq"
 fi
 
 if [ "$1" = "migrate" ]; then
-    START_DISCOURSE="$START_DISCOURSE -d=false"
+  START_DISCOURSE="$START_DISCOURSE -d=false"
 fi
 
 set -x
