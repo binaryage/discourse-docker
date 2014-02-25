@@ -50,6 +50,9 @@ function configure_from_env {
     export DISCOURSE_DB_PASSWORD=postgres
     export DISCOURSE_DB_HOST=$POSTGRES_HOST
     export DISCOURSE_DB_PORT=$POSTGRES_PORT
+    # https://github.com/mperham/sidekiq/issues/1047
+    # http://stackoverflow.com/questions/3966215/how-to-increase-max-pool-size-in-activerecord
+    export DISCOURSE_DB_POOL=10 
 
     export DISCOURSE_REDIS_HOST=$REDIS_HOST
     export DISCOURSE_REDIS_PORT=$REDIS_PORT
@@ -61,15 +64,10 @@ function configure_from_env {
     export DISCOURSE_SMTP_USER_NAME=$SMTP_USER_NAME
     export DISCOURSE_SMTP_PASSWORD=$SMTP_PASSWORD
     
-# test db
-    sed -i "s/# username: discourse_test/username: root/" config/database.yml
-    sed -i "s/# password: 123123123123/password: postgres/" config/database.yml
-    sed -i "s/host: localhost/host: $POSTGRES_HOST\n  port: $POSTGRES_PORT/" config/database.yml
-
-# http://stackoverflow.com/a/7529711
+    # http://stackoverflow.com/a/7529711
     sed -i "s/timeout: 5000/timeout: 5000\n  template: template0/" config/database.yml
 
-# postmark mailer
+    # postmark mailer
     if [ ! -z "$POSTMARK_API_KEY" ]; then
         sed -i "s/sendmail/postmark/" config/environments/production.rb
         sed -i "s/{arguments: '-i'}/{ :api_key => \"$POSTMARK_API_KEY\" }/" config/environments/production.rb
